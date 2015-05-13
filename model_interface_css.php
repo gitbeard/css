@@ -85,12 +85,25 @@
 		return css_query($q);
 	}
 
-	function css_insert_inv_item($a,$b,$c,$d,$e)
+	function css_insert_inv_item($a,$b,$c,$d,$e,$f,$g)
 	{
-		$q = "INSERT INTO `inv_item` (`id`, `part_number`, `description`, `stock_level`, `lead_time_days`, `preferred_vendor_id`) \
-				VALUES (NULL, '$a','$b','$c','$d','$e')";
+		$q = "INSERT INTO `inv_item` (`id`, `part_number`, `description`, `current_stock`, `per_tray`, `stock_level`, `lead_time_days`, `preferred_vendor_id`) 
+				VALUES (NULL, '$a','$b','$c','$d','$e','$f','$g')";
+		echo $q;
 		return css_query($q);
 	}
+
+
+
+
+	/************INVENTORY - VENDORS****************/
+	function css_get_inv_vendor_list()
+	{
+		$q = "SELECT * FROM `inv_vendor`";
+		return css_query($q);
+	}
+
+
 	
 	/************BARCODES****************/
 	
