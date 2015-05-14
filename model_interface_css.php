@@ -85,11 +85,23 @@
 		return css_query($q);
 	}
 
+	function css_find_inv_item_by_id($id)
+	{
+		$q = "SELECT * FROM `inv_item` WHERE `id` = $id";
+		return css_query($q);
+	}
+
 	function css_insert_inv_item($a,$b,$c,$d,$e,$f,$g)
 	{
 		$q = "INSERT INTO `inv_item` (`id`, `part_number`, `description`, `current_stock`, `per_tray`, `stock_level`, `lead_time_days`, `preferred_vendor_id`) 
 				VALUES (NULL, '$a','$b','$c','$d','$e','$f','$g')";
 		echo $q;
+		return css_query($q);
+	}
+
+	function css_update_item_current_stock($item_id,$current_stock)
+	{
+		$q = "UPDATE `inv_item` SET `current_stock` = '$current_stock' WHERE `id` = '$item_id'";
 		return css_query($q);
 	}
 
