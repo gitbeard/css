@@ -35,11 +35,11 @@
 	
 	function css_get_stages()
 	{
-		$q = "SELECT * FROM `stage`";
+		$q = "SELECT * FROM `status_stage`";
 		return css_query($q);
 	}
 	
-	
+	/************ SPLICING *************/
 	function css_get_splice_data()
 	{
 		//$q = "SELECT * FROM `status_splicer_data`";
@@ -77,7 +77,7 @@
 		return css_query($q);
 	}
 
-	/************STATUS - DAILY TOTALS*************/
+	/************ STATUS - DAILY TOTALS *************/
 
 	function css_get_daily_tally()
 	{
@@ -96,7 +96,7 @@
 
 
 
-	/************INVENTORY****************/
+	/************ INVENTORY ****************/
 	function css_get_inv_item_list()
 	{
 		$q = "SELECT * FROM `inv_item`";
@@ -126,7 +126,7 @@
 
 
 
-	/************INVENTORY - VENDORS****************/
+	/************ INVENTORY - VENDORS ****************/
 	function css_get_inv_vendor_list()
 	{
 		$q = "SELECT * FROM `inv_vendor`";
@@ -135,7 +135,7 @@
 
 
 	
-	/************BARCODES****************/
+	/************ BARCODES ****************/
 	
 	function css_get_barcode_command_type_ids()
 	{
