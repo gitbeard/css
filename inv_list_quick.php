@@ -1,4 +1,5 @@
 <?php
+echo '<style type="text/css" title="currentStyle"> @import "csslib/css/css.css"; </style>';
 
 include_once("model_interface_css.php");
 $inv_item_list = css_get_inv_item_list();
@@ -16,7 +17,7 @@ $form_method = "POST";
 
 /*<th>ID</th>*/
 echo '<div id="inv_item_table">';
-echo '<table id="inv_item_table">';
+echo '<table id="inv_item_table" style="border:1px solid black;">';
 echo '<tr><th>Name</th><th>Current Stock</th><th>Trays</th><th>Days (Weeks)</th></tr>';
 foreach($inv_item_list as $k => $v){
 	$trays = 0;
