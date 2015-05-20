@@ -38,6 +38,12 @@
 		$q = "SELECT * FROM `status_stage`";
 		return css_query($q);
 	}
+
+	function css_get_fiber_types()
+	{
+		$q = "SELECT * FROM `status_fiber_type`";
+		return css_query($q);
+	}
 	
 	/************ SPLICING *************/
 	function css_get_splice_data()
@@ -94,6 +100,13 @@
 
 	}
 
+	function css_insert_status_tray_new($b,$c,$d,$e,$f)
+	{
+		$q = "INSERT INTO `status_tray` (`id`,`tray_number`,`start_time`,`end_time`,`current_stage_id`,`fiber_type`) 
+				VALUES (NULL,'$b','$c','$d','$e','$f')";
+		echo $q;
+		return css_query($q);
+	}
 
 
 	/************ INVENTORY ****************/
