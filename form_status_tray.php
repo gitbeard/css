@@ -1,6 +1,8 @@
 
 <?php
 
+echo '<script src="https://code.jquery.com/jquery-1.10.2.js"></script>';
+
 include_once("model_interface_css.php");
 $stages = css_get_stages();
 $status_trays = css_get_view_status_trays();
@@ -44,7 +46,8 @@ foreach($st as $k => $v){
 				}
 				else{
 					$b = 'x';
-					echo '<td>'.'<input type="button" value="'.$b.'" id="'.$b.'" name="'.$b.'" onclick="msg('.$k.')">'.'</td>';
+					//echo '<td>'.'<input type="button" value="'.$b.'" id="'.$b.'" name="'.$b.'" onclick="msg('.$k.')">'.'</td>'; // alert testing
+					echo '<td>'.'<input type="button" value="'.$k.'" id="'.$stage_id.'" name="'.$b.'">'.'</td>'; // ajax submit
 				}
 			}
 			
@@ -54,6 +57,7 @@ foreach($st as $k => $v){
 echo "</table>";
 echo "</div>";
 
+echo '<script src="http://continentalsecondshift.com/telescent/csslib/js/submit_form_status_tray_ajax.js"></script>';
 //','.$value['stage_name'].
 ?>
 
