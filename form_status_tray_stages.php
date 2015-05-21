@@ -2,21 +2,21 @@
 <?php
 
 echo '<script src="https://code.jquery.com/jquery-1.10.2.js"></script>';
+echo '<style type="text/css" title="currentStyle"> @import "csslib/css/css.css"; </style>';
 
 include_once("model_interface_css.php");
 $stages = css_get_stages();
-$status_trays = css_get_view_status_trays();
+$status_trays = css_get_status_tray_stages();
 
 $st = array();
+$trays = array();
 foreach ($status_trays as $k => $v) {
-	$st[$v['tray_number']][$v['current_stage_id']] = $v['end_time'];
+	$st[$v['tray_number']][$v['stage_id']] = $v['end_time'];
+	$trays[$v['tray_number']] = $v['tray_id'];
 }
-/*
-echo "<pre>";
-print_r($st);
-print_r($status_trays);
-print_r($stages);
-*/
+/* echo "<pre>"; print_r($st); print_r($status_trays); print_r($stages); */
+
+echo '<div id="result"></div>';
 
 echo '<div id="status_trays">';
 echo '<table id="status_trays">';
@@ -38,38 +38,36 @@ foreach($st as $k => $v){
 			$lowest_stage_complete = key($v);
 
 			if($stage_id < $lowest_stage_complete){
-				echo '<td>'.''.'</td>';
+				echo '<td class="grey">'.'-'.'</td>';
 			}else{
 				if(isset($v[$value['id']])){
 					$d = date('m/d', strtotime($v[$value['id']]));
-					echo '<td>'.$d.'</td>';
+					echo '<td class="grey">'.$d.'</td>';
 				}
 				else{
 					$b = 'x';
 					//echo '<td>'.'<input type="button" value="'.$b.'" id="'.$b.'" name="'.$b.'" onclick="msg('.$k.')">'.'</td>'; // alert testing
-					echo '<td>'.'<input type="button" class="button" value="'.$b.'" id="'.$stage_id.'" name="'.$k.'">'.'</td>'; // ajax submit
+					echo '<td>'.'<input type="button" class="button" value="'.$b.'" id="'.$stage_id.'" name="'.$trays[$k].'">'.'</td>'; // ajax submit
 				}
 			}
-			
 		}
 	echo '</tr>';
 }
 echo "</table>";
 echo "</div>";
 
-echo '<script src="http://continentalsecondshift.com/telescent/csslib/js/submit_form_status_tray_ajax.js"></script>';
+echo '<script src="http://continentalsecondshift.com/telescent/csslib/js/submit_form_status_tray_ajax_new.js"></script>';
 //','.$value['stage_name'].
-?>
 
-
+/*
 <script>
 function msg(a) {
     alert("Tray "+ a);
 }
 </script>
 
-<?php
-/*
+
+
 id
 datetime
 reels

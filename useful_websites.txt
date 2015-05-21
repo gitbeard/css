@@ -1,0 +1,5 @@
+Useful Websites?
+
+https://forum.jquery.com/topic/ajax-and-reloading-a-dynamic-table
+http://stackoverflow.com/questions/2981419/how-to-get-ids-of-all-inputs-inside-the-form
+https://css-tricks.com/multiple-class-id-selectors/

@@ -83,7 +83,7 @@
 		return css_query($q);
 	}
 
-	/************ STATUS - DAILY TOTALS *************/
+	/************ STATUS - DAILY TALLY *************/
 
 	function css_get_daily_tally()
 	{
@@ -100,13 +100,36 @@
 
 	}
 
+
+	/************ STATUS - TRAYS *************/
+
 	function css_insert_status_tray_new($b,$c,$d,$e,$f)
 	{
 		$q = "INSERT INTO `status_tray` (`id`,`tray_number`,`start_time`,`end_time`,`current_stage_id`,`fiber_type`) 
 				VALUES (NULL,'$b','$c','$d','$e','$f')";
-		echo $q;
+		//echo $q;
 		return css_query($q);
 	}
+
+
+	function css_get_status_tray_stages()
+	{
+		$q = "SELECT * FROM `view_status_tray_stages`";
+		return css_query($q);
+	}
+
+	function css_find_tray_by_number($b){
+		$q = "SELECT * FROM `status_tray` WHERE `tray_number` = '$b'";
+		return css_query($q);
+	}
+
+	function css_insert_status_tray_stages_new($b,$c,$d,$e,$f)
+	{
+		$q = "INSERT INTO `status_tray_stages` (`id`,`tray_id`,`stage_id`,`start_time`,`end_time`,`person_id`) 
+				VALUES (NULL,'$b','$c','$d','$e','$f')";
+		return css_query($q);
+	}
+
 
 
 	/************ INVENTORY ****************/
