@@ -22,7 +22,7 @@ $b = 'tray_number';
 $f = 'fiber_type';
 
 echo '<form action="'.$form_process_location.'" id="itemForm" method="'.$form_method.'">';
-	echo '<input type="text" id="'.$b.'" name="'.$b.'" placeholder="'.$b.'">';
+	echo '<input type="number" id="'.$b.'" name="'.$b.'" placeholder="'.$b.'">';
 
 	/*echo '<select name="'.$e.'" id="'.$e.'">';
 		foreach ($stages as $key => $value) {

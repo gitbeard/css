@@ -47,7 +47,7 @@ foreach($st as $k => $v){
 				else{
 					$b = 'x';
 					//echo '<td>'.'<input type="button" value="'.$b.'" id="'.$b.'" name="'.$b.'" onclick="msg('.$k.')">'.'</td>'; // alert testing
-					echo '<td>'.'<input type="button" class="button" value="'.$b.'" id="'.$stage_id.'" name="'.$trays[$k].'">'.'</td>'; // ajax submit
+					echo '<td>'.'<input type="button" class="button" value="'.$value['stage_name'].'-'.$k.'" id="'.$stage_id.'" name="'.$trays[$k].'">'.'</td>'; // ajax submit
 				}
 			}
 		}

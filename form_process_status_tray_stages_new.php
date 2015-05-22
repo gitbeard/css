@@ -32,6 +32,14 @@ $f = 1; // coley
 
 css_insert_status_tray_stages_new($b,$c,$d,$e,$f);
 
+if($c > 11 or $c < 9){
+  $s = 2; // stage 1 created when new tray entered.
+  while($s < $c){
+    css_insert_status_tray_stages_new($b,$s,$d,$e,$f);
+    $s = $s + 1;
+  }
+}
+
 echo date('m/d');  //Prints the date back in the table
 
 //header("Location: http://continentalsecondshift.com/telescent/?q=tray_status");
