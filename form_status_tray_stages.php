@@ -30,6 +30,9 @@ echo '</tr>';
 
 //echo '<tr><th>Date</th><th>Reels</th><th>Wound</th><th>Route</th><th>Prep-In</th><th>Splice-In</th><th>Finish-In</th><th>Prep-Out</th><th>Splice-Out</th><th>Finish-Out</th><th>Test</th><th>Delivered</th><th>Broken Reels</th></tr>';
 foreach($st as $k => $v){
+	if(key($v) == 14){
+		continue;
+	}
 	echo '<tr>';
 	echo '<td>'.$k.'</td>';
 		foreach ($stages as $key => $value) {
@@ -38,11 +41,11 @@ foreach($st as $k => $v){
 			$lowest_stage_complete = key($v);
 
 			if($stage_id < $lowest_stage_complete){
-				echo '<td class="grey">'.'-'.'</td>';
+				echo '<td class="gray">'.'-'.'</td>';
 			}else{
 				if(isset($v[$value['id']])){
 					$d = date('m/d', strtotime($v[$value['id']]));
-					echo '<td class="grey">'.$d.'</td>';
+					echo '<td class="gray">'.$d.'</td>';
 				}
 				else{
 					$b = 'x';

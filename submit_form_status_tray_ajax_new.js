@@ -32,7 +32,7 @@ $(".button").click(function(event){
 
     // Fire off the request to /form.php
     request = $.ajax({
-        url: "http://continentalsecondshift.com/telescent/csslib/form_process_status_tray_stages_new.php",
+        url: "http://continentalsecondshift.com/telescent/csslib/form_process_status_tray_stages_new_inventory.php",
         type: "post",
         data: dataString,
         success: function(msg){

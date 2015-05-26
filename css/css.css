@@ -4,11 +4,15 @@
 #status_trays
 {
 padding: 0.1%;
+width: auto;
 }
 
 #status_trays th
 {
+border: 1px solid black;
 padding: 0.1%;
+text-align: center;
+white-space: normal;
 }
 
 #status_trays td 
@@ -16,9 +20,20 @@ padding: 0.1%;
 border: 1px solid black;	
 padding: 0.1%;	
 text-align: center;
+white-space: nowrap;
 }
 
-.grey
+.gray
 {	
-background-color: grey;
+background-color: gray;
+}
+
+.red
+{
+background-color: red;
+}
+
+.yellow
+{
+background-color: yellow;
 }

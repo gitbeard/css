@@ -114,7 +114,13 @@
 
 	function css_get_status_tray_stages()
 	{
-		$q = "SELECT * FROM `view_status_tray_stages`";
+		$q = "SELECT * FROM `view_status_tray_stages` ORDER BY `stage_id` DESC";
+		return css_query($q);
+	}
+
+	function css_get_status_tray_delivered()
+	{
+		$q = "SELECT * FROM `view_status_tray_stages` WHERE `stage_id` = '14'";
 		return css_query($q);
 	}
 
@@ -135,7 +141,7 @@
 	/************ INVENTORY ****************/
 	function css_get_inv_item_list()
 	{
-		$q = "SELECT * FROM `inv_item`";
+		$q = "SELECT * FROM `inv_item` ORDER BY `preferred_vendor_id` ASC";
 		return css_query($q);
 	}
 
@@ -153,12 +159,59 @@
 		return css_query($q);
 	}
 
-	function css_update_item_current_stock($item_id,$current_stock)
+	function css_update_item_current_stock($item_id, $current_stock)
 	{
 		$q = "UPDATE `inv_item` SET `current_stock` = '$current_stock' WHERE `id` = '$item_id'";
 		return css_query($q);
 	}
 
+	function css_item_current_stock_transaction($item_id, $transaction_amount)
+	{
+		$item_inv = css_find_inv_item_by_id($item_id);
+		$new_stock = $item_inv[0]['current_stock'] + $transaction_amount;
+		css_update_item_current_stock($item_id, $new_stock);
+		return;
+	}
+
+	function add_or_remove_one_tray_worth_of_inventory($a_or_r){
+		$items = css_get_inv_item_list();
+		foreach ($items as $key => $value) {
+			$item_id = $value['id'];
+			$transaction_amount = $a_or_r * $value['per_tray']; // $a_or_r is either -1 or +1 to add or remove.
+			css_item_current_stock_transaction($item_id, $transaction_amount);
+		}
+		return;
+	}
+
+	function remove_one_tray_worth_of_inventory(){
+		add_or_remove_one_tray_worth_of_inventory(-1);
+		return;
+	}
+
+	function add_one_tray_worth_of_inventory(){
+		add_or_remove_one_tray_worth_of_inventory(1);
+		return;
+	}
+
+	function has_tray_been_wound($tray_id){
+		//Check if tray has already been wound
+		$q = "SELECT * FROM `view_status_tray_stages` WHERE `tray_id` = '$tray_id' AND `stage_id` = 4";
+		$result = css_query($q);
+		if(isset($result[0])){
+			return 1; //tray already wound, inventory already removed.
+		}else{
+			return 0;
+		}
+		return 0;
+	}
+
+	function tray_wound($tray_id){
+		$wound = has_tray_been_wound($tray_id);
+		if($wound == 0){
+			remove_one_tray_worth_of_inventory();
+		}
+		return;
+	}
 
 
 
