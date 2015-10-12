@@ -136,12 +136,43 @@
 		return css_query($q);
 	}
 
+	function get_fiber_type_for_tray_id($tray_id){
+		$q = "SELECT `fiber_type` FROM `status_tray` WHERE `id` = '$tray_id'";
+		$array = css_query($q);
+		return $array[0]['fiber_type'];
+	}
 
+
+	/************ STATUS - MODULES *************/
+
+	function css_get_status_tray_in_module()
+	{
+		$q = "SELECT * FROM `view_status_tray_stages` WHERE `stage_id` = '15'";
+		return css_query($q);
+	}
+
+	function get_list_of_modules()
+	{
+		$q = "SELECT * FROM `status_module` WHERE `delivered` = 0";
+		return css_query($q);
+	}
+
+	function css_assign_module_id_to_tray_id($tray_id, $module_id)
+	{
+		$q = "UPDATE `status_tray` SET `module_id` = $module_id WHERE `tray_id` = $tray_id";
+		return css_query($q);
+	}
 
 	/************ INVENTORY ****************/
 	function css_get_inv_item_list()
 	{
 		$q = "SELECT * FROM `inv_item` ORDER BY `preferred_vendor_id` ASC";
+		return css_query($q);
+	}
+
+	function css_get_inv_item_list_by_fiber_type($sm_or_om4)
+	{
+		$q = "SELECT * FROM `inv_item` WHERE `sm_or_om4_only` = 0 OR `sm_or_om4_only` = $sm_or_om4 ORDER BY `preferred_vendor_id` ASC";
 		return css_query($q);
 	}
 
@@ -173,8 +204,8 @@
 		return;
 	}
 
-	function add_or_remove_one_tray_worth_of_inventory($a_or_r){
-		$items = css_get_inv_item_list();
+	function add_or_remove_one_tray_worth_of_inventory($a_or_r, $sm_or_om4){
+		$items = css_get_inv_item_list_by_fiber_type($sm_or_om4);
 		foreach ($items as $key => $value) {
 			$item_id = $value['id'];
 			$transaction_amount = $a_or_r * $value['per_tray']; // $a_or_r is either -1 or +1 to add or remove.
@@ -183,13 +214,13 @@
 		return;
 	}
 
-	function remove_one_tray_worth_of_inventory(){
-		add_or_remove_one_tray_worth_of_inventory(-1);
+	function remove_one_tray_worth_of_inventory($sm_or_om4){
+		add_or_remove_one_tray_worth_of_inventory(-1, $sm_or_om4);
 		return;
 	}
 
-	function add_one_tray_worth_of_inventory(){
-		add_or_remove_one_tray_worth_of_inventory(1);
+	function add_one_tray_worth_of_inventory($sm_or_om4){
+		add_or_remove_one_tray_worth_of_inventory(1, $sm_or_om4);
 		return;
 	}
 
@@ -208,7 +239,8 @@
 	function tray_wound($tray_id){
 		$wound = has_tray_been_wound($tray_id);
 		if($wound == 0){
-			remove_one_tray_worth_of_inventory();
+			$sm_or_om4 = get_fiber_type_for_tray_id($tray_id);
+			remove_one_tray_worth_of_inventory($sm_or_om4);
 		}
 		return;
 	}

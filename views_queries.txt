@@ -4,3 +4,24 @@ SELECT `status_tray`.*, `status_stage`.`stage_name`, `status_fiber_type`.`fiber_
 FROM status_tray, status_stage, status_fiber_type
 WHERE (`status_tray`.`current_stage_id` = `status_stage`.`id` AND `status_tray`.`fiber_type` = `status_fiber_type`.`id`)
         
+
+SELECT `status_module`.*, `status_tray`.`id`, `status_tray`.`tray_number`, `status_tray`.`fiber_type`, `status_fiber_type`.`fiber_type_description`
+FROM status_module, status_tray, status_fiber_type
+WHERE ( `status_module`.`tray_1_id` = `status_tray`.`id` AND 
+		`status_tray`.`fiber_type` = `status_fiber_type`.`id`)
+
+
+		`status_module`.`tray_2_id` = `status_tray`.`id` AND 
+		`status_module`.`tray_3_id` = `status_tray`.`id` AND 
+		`status_module`.`tray_4_id` = `status_tray`.`id` AND 
+		`status_module`.`tray_5_id` = `status_tray`.`id` AND 
+		`status_module`.`tray_6_id` = `status_tray`.`id` AND 
+		`status_module`.`tray_7_id` = `status_tray`.`id` AND 
+		`status_module`.`tray_8_id` = `status_tray`.`id` AND 
+
+
+
+SELECT `status_module`.*, `status_tray`.`id`, `status_tray`.`tray_number`, `status_tray`.`fiber_type`, `status_fiber_type`.`fiber_type_description`
+FROM status_module, status_tray, status_fiber_type
+WHERE ( `tray_1_number` = `status_tray`.`tray_number` AND 
+		`status_tray`.`fiber_type` = `status_fiber_type`.`id`)

@@ -65,10 +65,20 @@ echo "</table>";
 echo "</div>";
 
 echo '<form action="http://continentalsecondshift.com/telescent/csslib/form_process_inv_one_tray.php" method="POST">';
-echo '<input type="submit" name="add" value="Add One Tray of Inventory" class="button" />';
+echo 'Add One Tray of Inventory: ';
+echo '<input type="submit" name="add-SM" value="Add SM" class="button" />';
+echo '&nbsp&nbsp&nbsp';
+echo '<input type="submit" name="add-OM4" value="Add OM4" class="button" />';
 echo '<br>';
 echo '<br>';
-echo '<input type="submit" name="remove" value="Remove One Tray of Inventory" class="button" />';
+echo 'Remove One Tray of Inventory: ';
+echo '<input type="submit" name="remove-SM" value="Remove SM" class="button" />';
+echo '&nbsp&nbsp&nbsp';
+echo '<input type="submit" name="remove-OM4" value="Remove OM4" class="button" />';
+// echo '<input type="submit" name="add" value="Add One Tray of Inventory" class="button" />';
+// echo '<br>';
+// echo '<br>';
+// echo '<input type="submit" name="remove" value="Remove One Tray of Inventory" class="button" />';
 echo '</form>';
 
 

@@ -5,7 +5,8 @@ echo '<script src="https://code.jquery.com/jquery-1.10.2.js"></script>';
 echo '<style type="text/css" title="currentStyle"> @import "csslib/css/css.css"; </style>';
 
 include_once("model_interface_css.php");
-$stages = css_get_stages();
+// $stages = css_get_modules();
+$modules = css_get_modules();
 $status_trays = css_get_status_tray_stages();
 
 $st = array();
@@ -21,47 +22,36 @@ echo '<div id="result"></div>';
 echo '<div id="status_trays">';
 echo '<table id="status_trays">';
 
-// Table Header Row //
 echo '<tr>';
 echo '<th>Tray #</th>';
-$display_stages = array(4,5,7,10,12,15);
 foreach ($stages as $key => $value) {
-	if(in_array($value['id'], $display_stages)){
-		echo '<th>'.$value['stage_name'].'</th>';
-	}
+	echo '<th>'.$value['stage_name'].'</th>';
 }
-
-// foreach ($display_stages as $key => $value) {
-// 	echo '<th>'.$stages[$value-1]['stage_name'].'</th>';
-// }
 echo '</tr>';
 
 //echo '<tr><th>Date</th><th>Reels</th><th>Wound</th><th>Route</th><th>Prep-In</th><th>Splice-In</th><th>Finish-In</th><th>Prep-Out</th><th>Splice-Out</th><th>Finish-Out</th><th>Test</th><th>Delivered</th><th>Broken Reels</th></tr>';
 foreach($st as $k => $v){
-	if(key($v) == 14 or key($v) == 15){
+	if(key($v) == 14){
 		continue;
 	}
-	// Table Data Rows //
 	echo '<tr>';
 	echo '<td>'.$k.'</td>';
 		foreach ($stages as $key => $value) {
-			if(in_array($value['id'], $display_stages)){
-				$stage_id = $value['id'];
-				reset($v);
-				$lowest_stage_complete = key($v);
+			$stage_id = $value['id'];
+			reset($v);
+			$lowest_stage_complete = key($v);
 
-				if($stage_id < $lowest_stage_complete){
-					echo '<td class="gray">'.'-'.'</td>';
-				}else{
-					if(isset($v[$value['id']])){
-						$d = date('m/d', strtotime($v[$value['id']]));
-						echo '<td class="gray">'.$d.'</td>';
-					}
-					else{
-						$b = 'x';
-						//echo '<td>'.'<input type="button" value="'.$b.'" id="'.$b.'" name="'.$b.'" onclick="msg('.$k.')">'.'</td>'; // alert testing
-						echo '<td>'.'<input type="button" class="button" value="'.$value['stage_name'].'-'.$k.'" id="'.$stage_id.'" name="'.$trays[$k].'">'.'</td>'; // ajax submit
-					}
+			if($stage_id < $lowest_stage_complete){
+				echo '<td class="gray">'.'-'.'</td>';
+			}else{
+				if(isset($v[$value['id']])){
+					$d = date('m/d', strtotime($v[$value['id']]));
+					echo '<td class="gray">'.$d.'</td>';
+				}
+				else{
+					$b = 'x';
+					//echo '<td>'.'<input type="button" value="'.$b.'" id="'.$b.'" name="'.$b.'" onclick="msg('.$k.')">'.'</td>'; // alert testing
+					echo '<td>'.'<input type="button" class="button" value="'.$value['stage_name'].'-'.$k.'" id="'.$stage_id.'" name="'.$trays[$k].'">'.'</td>'; // ajax submit
 				}
 			}
 		}
@@ -70,7 +60,7 @@ foreach($st as $k => $v){
 echo "</table>";
 echo "</div>";
 
-echo '<script src="http://continentalsecondshift.com/telescent/csslib/js/submit_form_status_tray_ajax_new.js"></script>';
+echo '<script src="http://continentalsecondshift.com/telescent/csslib/js/submit_form_tray_in_module_ajax_new.js"></script>';
 //','.$value['stage_name'].
 
 /*
