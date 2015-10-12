@@ -6,7 +6,7 @@ echo '<script src="https://code.jquery.com/jquery-1.10.2.js"></script>';
 $stages = css_get_stages();
 $fiber_types = css_get_fiber_types();
 
-$form_process_location = "http://continentalsecondshift.com/telescent/csslib/form_process_status_tray_new_inventory.php";//if not doing AJAX and want to view processing page use this: "?q=node/7"; 
+$form_process_location = "http://continentalsecondshift.com/telescent/csslib/form_process_status_tray_new.php";//if not doing AJAX and want to view processing page use this: "?q=node/7"; 
 $form_method = "POST";
 
 //$a = 'id'; //$c = 'start_time'; //$d = 'end_time'; //$e = 'current_stage_id'; 
